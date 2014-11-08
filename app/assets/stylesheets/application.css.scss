@@ -11,12 +11,18 @@
  * file per style scope.
  *
  *= require semantic-ui
+ *= require font-awesome
  *= require news_items
  *= require_tree .
  *= require_self
  */
-@import url(http://fonts.googleapis.com/css?family=Open+Sans);
+@import url(http://fonts.googleapis.com/css?family=PT+Sans);
 
 body {
-  font-family: "Open Sans", "helvetica neue", "Helvetica", "Arial", "Verdana", "Calibri", sans-serif;
+  font-family: "PT Sans", "helvetica neue", "Helvetica", "Arial", "Verdana", "Calibri", sans-serif;
+  color: #333;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-weight: normal;
 }

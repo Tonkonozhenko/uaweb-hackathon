@@ -12,6 +12,7 @@ Rails.application.routes.draw do
   end
 
   get 'token' => 'application#token'
+  get 'current_user' => 'application#_current_user'
 
   resources :news_items, path: 'news', only: [:index, :show] do
     resources :comments, only: [:index, :create]
@@ -20,5 +21,5 @@ Rails.application.routes.draw do
       post 'dislike'
     end
   end
-  resources :categories, actions: [:index]
+  resources :categories, only: [:index]
 end
