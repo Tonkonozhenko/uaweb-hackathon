@@ -6,6 +6,8 @@ var Auth = function (app) {
 
     this.app = app;
 
+    this.IS_LOGGED = false;
+
     this.init();
 
 };
@@ -16,9 +18,20 @@ Auth.prototype.init = function () {
 
     var makeLogin = function (login) {
 
-        $("#menu-register").remove();
+        $("#menu-register").css("display", "none");
         $("#menu-login").html("<i class=\"user icon\"></i>" + login);
         $("#loginModal").modal("hide");
+        $("#menu-logout").css("display", "block");
+        _.IS_LOGGED = true;
+
+    };
+
+    var makeLogout = function () {
+
+        $("#menu-register").css("display", "block");
+        $("#menu-login").html("<i class=\"lock icon\"></i>Войти");
+        $("#menu-logout").css("display", "none");
+        this.IS_LOGGED = false;
 
     };
 
@@ -49,7 +62,15 @@ Auth.prototype.init = function () {
 
     };
 
+    $("#menu-logout").click(function () {
+
+        $.post("http://" + _.app.SERVER_HOSTNAME + ":" + _.app.SERVER_PORT + "/logout.json",
+            makeLogout);
+
+    });
+
     $("#menu-login").click(function () {
+        if (_.IS_LOGGED) return;
         $("#loginModal").modal("show");
     });
 

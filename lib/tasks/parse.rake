@@ -34,10 +34,14 @@ end
 
 def parse_korrespondent(news_item, doc)
   news_item.text = doc.css('.post-item__text').inner_html
+  news_item.image = (URI.parse(doc.css('.post-item__photo/img').attribute('src')) rescue nil)
+  # post-item__photo
 end
 
 def parse_liga_news(news_item, doc)
   news_item.text = doc.css('._ga1_on_').inner_html
+  # news_item.image = URI.parse(doc.css('.img/div/img').attribute('src'))
+  # 1.to_s
 end
 
 def parse_lig_biz(news_item, doc)
@@ -49,8 +53,8 @@ namespace :parse do
   task index: :environment do
     {
         censor: 'http://censor.net.ua/includes/news_ru.xml',
-        # liga_news: 'http://news.liga.net/all/rss.xml',
-        # lig_biz: 'http://biz.liga.net/all/rss.xml',
+        liga_news: 'http://news.liga.net/all/rss.xml',
+        lig_biz: 'http://biz.liga.net/all/rss.xml',
         tsn: 'http://ru.tsn.ua/rss/',
         podrobnosti: 'http://podrobnosti.ua/rss/',
         korrespondent: 'http://k.img.com.ua/rss/ru/all_news2.0.xml',
