@@ -18,6 +18,14 @@ class NewsItem < ActiveRecord::Base
   has_many :category_news_items
   has_many :categories, through: :category_news_items
 
+  has_attached_file :image, :styles => {:medium => "320x240>", :thumb => "160x180>"}
+  validates_attachment_content_type :image, :content_type => ["image/jpg", "image/jpeg", "image/png", "image/gif"]
+  # :default_url => "/no_avatar.gif"
+  # do_not_validate_attachment_file_type :image
+
+
+  validates_presence_of :title, :text, :url
+
   has_many :comments
 
   scope :by_category, -> (category_ids) { joins(:category_news_items).where(category_news_items: { category_id: category_ids }) }
