@@ -4,8 +4,8 @@ class CreateNewsItems < ActiveRecord::Migration
       t.string :title
       t.text :text
       t.float :rating, default: 0
-      t.integer :plus_ids, array: true, defailt: []
-      t.integer :minus_ids, array: true, defailt: []
+      t.integer :plus_ids, array: true, default: []
+      t.integer :minus_ids, array: true, default: []
       t.integer :plus_count, default: 0
       t.integer :minus_count, default: 0
       t.text :url
