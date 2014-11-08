@@ -3,11 +3,11 @@ class CreateNewsItems < ActiveRecord::Migration
     create_table :news_items do |t|
       t.string :title
       t.text :text
-      t.float :rating
-      t.integer :plus_ids, array: true
-      t.integer :minus_ids, array: true
-      t.integer :plus_count
-      t.integer :minus_count
+      t.float :rating, default: 0
+      t.integer :plus_ids, array: true, defailt: []
+      t.integer :minus_ids, array: true, defailt: []
+      t.integer :plus_count, default: 0
+      t.integer :minus_count, default: 0
 
       t.timestamps
     end
