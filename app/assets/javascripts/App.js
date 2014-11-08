@@ -1,6 +1,6 @@
 var App = function () {
 
-    this.SERVER_HOSTNAME = "172.29.8.74";
+    this.SERVER_HOSTNAME = location.hostname;
     this.SERVER_PORT = 3000;
     this.WS_PORT = 3333;
 
