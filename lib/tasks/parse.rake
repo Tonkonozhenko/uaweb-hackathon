@@ -35,7 +35,6 @@ end
 def parse_korrespondent(news_item, doc)
   news_item.text = doc.css('.post-item__text').inner_html
   news_item.image = (URI.parse(doc.css('.post-item__photo/img').attribute('src')) rescue nil)
-  # post-item__photo
 end
 
 def parse_liga_news(news_item, doc)
