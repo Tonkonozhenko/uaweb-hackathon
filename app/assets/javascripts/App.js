@@ -1,44 +1,44 @@
 var App = function () {
 
-    this.SERVER_HOSTNAME = location.hostname;
-    this.SERVER_PORT = 3000;
-    this.WS_PORT = 3333;
+  this.SERVER_HOSTNAME = location.hostname;
+  this.SERVER_PORT = 3000;
+  this.WS_PORT = 3333;
 
-    this.newsPage = new NewsPage(this);
+  this.newsPage = new NewsPage(this);
 
-    this.server = new Server(this);
+  this.server = new Server(this);
 
-    this.comments = new Comments(this);
+  this.comments = new Comments(this);
 
-    this.auth = new Auth(this);
+  this.auth = new Auth(this);
 
-    this.init();
+  this.init();
 
 };
 
 App.prototype.init = function () {
 
-    $("#newsContainer").sidebar({
-        transition: "push"
-    }); //.sidebar("attach events", "#test");
+  $("#newsContainer").sidebar({
+    transition: "push"
+  }); //.sidebar("attach events", "#test");
 
-    $(window).resize(function () {
+  $(window).resize(function () {
 
-    });
+  });
 
-    $("#menuButton").click(function () {
-        $("#menu").sidebar("toggle");
-    });
+  $("#menuButton").click(function () {
+    $("#menu").sidebar("toggle");
+  });
 
-    var self = this;
-    $.ajax({
-        url: '/news.json',
-        success: function(data) {
-            data.news_items.forEach(function(news_item) {
-                self.appendCard(news_item);
-            });
-        }
-    });
+  var self = this;
+  $.ajax({
+    url: '/news.json',
+    success: function (data) {
+      data.news_items.forEach(function (news_item) {
+        self.appendCard(news_item);
+      });
+    }
+  });
 
 //    this.appendCard({
 //        id: 1,
@@ -69,33 +69,32 @@ App.prototype.init = function () {
 
 };
 
+App.prototype.currentColumn = 0;
+
 App.prototype.appendCard = function (data) {
 
-    var _ = this,
-        d1 = $("<div></div>"),
-        d2 = $("<div></div>"),
-        d3 = $("<div class='card'></div>"),
-        h1 = $("<h1></h1>"),
-        a =  $("<a href=\"#" + data.id + "\">" + data.title + "</a>"),
-        img = $('<img>', {src: data.image_url}),
-        divider = $("<div class='ui divider'></div>");
-//        p = $("<p>" + data.text + "</p>");
+  var _ = this,
+      d1 = $("<div></div>"),
+      d2 = $("<div></div>"),
+      d3 = $("<div class='card'></div>"),
+      h1 = $("<h1></h1>"),
+      a = $("<a href=\"#" + data.id + "\">" + data.title + "</a>"),
+      img = $('<a></a>', {href: '#' + data.id}).append($('<img>', {src: data.image_url}));
 
-    h1.append(a);
-    d3.append(img);
-    d3.append(h1);
-    d3.append(divider);
-//    d3.append(divider);
-//    d3.append(p);
-    d2.append(d3);
-    d1.append(d2);
+  h1.append(a);
+  d3.append(img);
+  d3.append(h1);
+  d2.append(d3);
+  d1.append(d2);
 
-    $("#newsFeedContainer").prepend(d1);
+  $("#newsFeedContainer").prepend(d1);
 
-    a.on("click", function () {
+  a.on("click", function () {
+    _.newsPage.load(data.id);
+  });
 
-        _.newsPage.load(data.id);
-
-    });
+  img.on("click", function () {
+    _.newsPage.load(data.id);
+  });
 
 };
