@@ -22,12 +22,6 @@ class NewsItem < ActiveRecord::Base
 
   validates_presence_of :title, :text, :url
 
-  before_save do
-    if rating_change
-
-    end
-  end
-
   def plus!(id)
     plus_ids << id
     plus_ids_will_change!
