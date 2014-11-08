@@ -74,16 +74,19 @@ App.prototype.appendCard = function (data) {
     var _ = this,
         d1 = $("<div></div>"),
         d2 = $("<div></div>"),
-        d3 = $("<div class='ui card stacked segment'></div>"),
+        d3 = $("<div class='card'></div>"),
         h1 = $("<h1></h1>"),
         a =  $("<a href=\"#" + data.id + "\">" + data.title + "</a>"),
-        divider = $("<div class='ui divider'></div>"),
-        p = $("<p>" + data.text + "</p>");
+        img = $('<img>', {src: data.image_url}),
+        divider = $("<div class='ui divider'></div>");
+//        p = $("<p>" + data.text + "</p>");
 
     h1.append(a);
+    d3.append(img);
     d3.append(h1);
     d3.append(divider);
-    d3.append(p);
+//    d3.append(divider);
+//    d3.append(p);
     d2.append(d3);
     d1.append(d2);
 

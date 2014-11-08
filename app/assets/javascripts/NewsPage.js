@@ -78,7 +78,7 @@ NewsPage.prototype.load = function (id) {
     };
 
     $.get("http://" + this.app.SERVER_HOSTNAME + ":" + this.app.SERVER_PORT
-        + "/news/1.json", function (data) {
+        + "/news/" + id + ".json", function (data) {
 
         data = data["news_item"];
 
