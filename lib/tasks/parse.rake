@@ -14,9 +14,9 @@ end
 
 # Fills missing info for news
 def parse_html(media, news_item)
-    doc = Nokogiri::HTML(open(news_item.url))
-    send("parse_#{media}", news_item, doc)
-    news_item.save
+  doc = Nokogiri::HTML(open(news_item.url))
+  send("parse_#{media}", news_item, doc)
+  news_item.save
 end
 
 def parse_censor(news_item, doc)
@@ -25,6 +25,7 @@ end
 
 def parse_tsn(news_item, doc)
   news_item.text = doc.css('.news_text').inner_html
+  news_item.image = (URI.parse(doc.css('.picture/a/img').attribute('src')) rescue nil)
 end
 
 def parse_podrobnosti(news_item, doc)
@@ -48,8 +49,8 @@ namespace :parse do
   task index: :environment do
     {
         censor: 'http://censor.net.ua/includes/news_ru.xml',
-        liga_news: 'http://news.liga.net/all/rss.xml',
-        lig_biz: 'http://biz.liga.net/all/rss.xml',
+        # liga_news: 'http://news.liga.net/all/rss.xml',
+        # lig_biz: 'http://biz.liga.net/all/rss.xml',
         tsn: 'http://ru.tsn.ua/rss/',
         podrobnosti: 'http://podrobnosti.ua/rss/',
         korrespondent: 'http://k.img.com.ua/rss/ru/all_news2.0.xml',
