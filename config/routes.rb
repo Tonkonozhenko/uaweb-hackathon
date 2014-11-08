@@ -13,6 +13,7 @@ Rails.application.routes.draw do
 
   root 'news_items#index'
   resources :news_items, path: 'news', only: [:index, :show] do
+    resources :comments, only: [:index, :create]
     member do
       post 'like'
       post 'dislike'
