@@ -32,6 +32,19 @@ def get_news
   end
 end
 
+def parse_liga
+  doc_XML = Nokogiri::XML(open('http://news.liga.net/all/rss.xml'))
+  items = doc_XML.css('item')
+  items.each do |item|
+    news = NewsItem.new
+    news.title = item.css('title').text
+    news.short_text = item.css('description').text
+    news.url = item.css('link').text
+    doc_HTML = Nokogiri::HTML(open(news.url))
+    news.text = doc_HTML.css('._ga1_on_').inner_html
+    news.save
+  end
+end
 
 # http://censor.net.ua/includes/news_ru.xml
 # def get_news_from_censor_ua
@@ -84,7 +97,7 @@ namespace :parse do
   task index: :environment do
 
     get_news
-
+    # parse_liga
     puts 'Hello world'
   end
 end
