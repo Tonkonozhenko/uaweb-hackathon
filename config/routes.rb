@@ -21,5 +21,5 @@ Rails.application.routes.draw do
       post 'dislike'
     end
   end
-  resources :categories, actions: [:index]
+  resources :categories, only: [:index]
 end

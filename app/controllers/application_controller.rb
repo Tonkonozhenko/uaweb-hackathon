@@ -8,6 +8,6 @@ class ApplicationController < ActionController::Base
   end
 
   def _current_user
-    render user_signed_in? ? { json: current_user, serializer: CurrentUserSerializer } : { json: false }
+    render user_signed_in? ? { json: current_user, serializer: CurrentUserSerializer } : { json: {}, status: :forbidden }
   end
 end
