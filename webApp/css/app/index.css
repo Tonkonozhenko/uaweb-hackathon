@@ -78,6 +78,10 @@ h1 {
     white-space: nowrap;
 }
 
+.or:before {
+    content: "или" !important;
+}
+
 @media screen and (max-width: 1900px) {
 
     .newsGrid > div {
