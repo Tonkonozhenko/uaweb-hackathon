@@ -24,32 +24,42 @@ App.prototype.init = function () {
 
     });
 
-    this.appendCard({
-        id: 1,
-        title: "Breaking news",
-        text: "This is test"
+    var self = this;
+    $.ajax({
+      url: '/news.json',
+      success: function(data) {
+        data.news_items.forEach(function(news_item) {
+          self.appendCard(news_item);
+        });
+      }
     });
 
-    this.appendCard({
-        id: 2,
-        title: "Breaking news 2",
-        text: "This is test, dasjkdh kadhj shdjk ahskjdh jasjd hakjs dhkjashjd hakjs hjka shdkj"
-    });
-
-    this.appendCard({
-        id: 3,
-        title: "You will not believe",
-        text: "Really, it is hard to believe"
-    });
-
-    this.appendCard({
-        id: 4,
-        title: "You won't really believe!",
-        text: "Too much text, too much text, too much text, too much text, too much text, " +
-            "too much text, too much text, too much text, too much text, too much text, " +
-            "too much text, too much text, too much text, too much text, too much text, " +
-            "too much text, too much text, too much text, too much text, too much text..."
-    });
+//    this.appendCard({
+//        id: 1,
+//        title: "Breaking news",
+//        text: "This is test"
+//    });
+//
+//    this.appendCard({
+//        id: 2,
+//        title: "Breaking news 2",
+//        text: "This is test, dasjkdh kadhj shdjk ahskjdh jasjd hakjs dhkjashjd hakjs hjka shdkj"
+//    });
+//
+//    this.appendCard({
+//        id: 3,
+//        title: "You will not believe",
+//        text: "Really, it is hard to believe"
+//    });
+//
+//    this.appendCard({
+//        id: 4,
+//        title: "You won't really believe!",
+//        text: "Too much text, too much text, too much text, too much text, too much text, " +
+//            "too much text, too much text, too much text, too much text, too much text, " +
+//            "too much text, too much text, too much text, too much text, too much text, " +
+//            "too much text, too much text, too much text, too much text, too much text..."
+//    });
 
 };
 
