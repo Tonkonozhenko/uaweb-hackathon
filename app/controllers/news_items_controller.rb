@@ -10,7 +10,7 @@ class NewsItemsController < ApplicationController
         if resource.liked_by?(current_user) || resource.disliked_by?(current_user)
           false
         else
-          resource.plus!(current_user_id)
+          resource.plus!(current_user.id)
         end
     render json: { ok: ok }, status: ok ? :ok : :forbidden
   end
@@ -19,9 +19,16 @@ class NewsItemsController < ApplicationController
     current_user_id = current_user.id
 
     ok =
-        if resource.plus_ids.index(current_user_id).nil? && resource.minus_ids.index(current_user_id).nil?
-          resource.minus!(current_user_id)
+        if resource.liked_by?(current_user) || resource.disliked_by?(current_user)
+          false
+        else
+          resource.minus!(current_user.id)
         end
     render json: { ok: ok }, status: ok ? :ok : :forbidden
+  end
+
+  protected
+  def collection
+    @news_items ||= end_of_association_chain.order('rating DESC').page(params[:page]).per(50)
   end
 end

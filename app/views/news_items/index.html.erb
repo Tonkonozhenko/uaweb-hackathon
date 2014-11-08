@@ -5,6 +5,9 @@
       <td><%= resource.title %></td>
       <td><%= resource.text.truncate(100) %></td>
       <td><%= link_to 'link', resource.url %></td>
+      <td><%= resource.plus_count %></td>
+      <td><%= resource.minus_count %></td>
+      <td><%= resource.rating %></td>
     </tr>
   <% end %>
 </table>
