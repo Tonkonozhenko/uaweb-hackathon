@@ -1,6 +1,12 @@
 var App = function () {
 
-    this.newsPage = new NewsPage();
+    this.SERVER_HOSTNAME = "172.29.8.74";
+    this.SERVER_PORT = 3000;
+    this.WS_PORT = 3333;
+
+    this.newsPage = new NewsPage(this);
+
+    this.server = new Server(this);
 
     this.init();
 

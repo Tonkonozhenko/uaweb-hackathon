@@ -1,4 +1,13 @@
-var NewsPage = function () {
+/**
+ * @param {App} app
+ * @constructor
+ */
+var NewsPage = function (app) {
+
+    /**
+     * @type {App}
+     */
+    this.app = app;
 
     this.init();
 
@@ -29,7 +38,8 @@ NewsPage.prototype.load = function (id) {
 
     $("#newsContainer").css("left", "0");
 
-    $.get("http://172.29.8.74:3000/news/1.json", function (data) {
+    $.get("http://" + this.app.SERVER_HOSTNAME + ":" + this.app.SERVER_PORT
+        + "/news/1.json", function (data) {
 
         $("#newsContainer-title").text(data["news_item"].title);
         $("#newsContainer-body").html(data["news_item"].text);
@@ -41,5 +51,6 @@ NewsPage.prototype.load = function (id) {
 NewsPage.prototype.close = function () {
 
     $("#newsContainer").css("left", "100%");
+    location.hash = "";
 
 };

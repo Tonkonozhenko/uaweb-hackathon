@@ -9,6 +9,7 @@
     <script type="text/javascript" src="js/semantic.min.js"></script>
     <script type="text/javascript" src="js/app/App.js"></script>
     <script type="text/javascript" src="js/app/NewsPage.js"></script>
+    <script type="text/javascript" src="js/app/Server.js"></script>
 </head>
 <body onload="app = new App();">
     <div class="mainPage">
@@ -43,14 +44,19 @@
     <div id="newsContainer">
         <div>
             <div class="ui down button" id="newsContainer-backButton">
-                <i class="user icon"></i>
+                <i class="left icon"></i>
                 Назад
             </div>
         </div>
-        <h1 id="newsContainer-title">News header</h1>
-        <p id="newsContainer-body">
-            News body
-        </p>
+        <div>
+            <div class="ui card instructive segment">
+                <h1 id="newsContainer-title">News header</h1>
+                <div class='ui divider'></div>
+                <p id="newsContainer-body">
+                    News body
+                </p>
+            </div>
+        </div>
     </div>
 </body>
 </html>
