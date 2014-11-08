@@ -6,7 +6,8 @@ sudo -u postgres psql <<EOF
 alter user postgres with password 'postgres';
 EOF
 
-gpg --keyserver hkp://keys.gnupg.net --recv-keys D39DC0E3
+curl -#LO https://rvm.io/mpapis.asc
+gpg --import mpapis.asc
 
 curl -sSL https://get.rvm.io | bash -s stable
 

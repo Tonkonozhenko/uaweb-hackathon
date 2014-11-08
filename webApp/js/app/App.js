@@ -8,6 +8,8 @@ var App = function () {
 
     this.server = new Server(this);
 
+    this.auth = new Auth(this);
+
     this.init();
 
 };

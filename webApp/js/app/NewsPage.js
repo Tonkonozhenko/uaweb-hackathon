@@ -9,6 +9,8 @@ var NewsPage = function (app) {
      */
     this.app = app;
 
+    this.currentID = 0;
+
     this.init();
 
 };
@@ -21,6 +23,23 @@ NewsPage.prototype.init = function () {
     $("#newsContainer-backButton").click(function () {
 
         _.close();
+
+    });
+
+    $("#newsContainer-believeButton").click(function () {
+
+        $.post("http://" + _.app.SERVER_HOSTNAME + ":" + _.app.SERVER_PORT + "/news/" + _.currentID + "/like",
+            function () {
+            console.log("Sent believe.");
+        });
+
+    });
+
+    $("#newsContainer-notBelieveButton").click(function () {
+
+        $.post("news/" + _.currentID + "/dislike", function () {
+            console.log("Sent not believe.");
+        });
 
     });
 
@@ -41,8 +60,18 @@ NewsPage.prototype.load = function (id) {
     $.get("http://" + this.app.SERVER_HOSTNAME + ":" + this.app.SERVER_PORT
         + "/news/1.json", function (data) {
 
-        $("#newsContainer-title").text(data["news_item"].title);
-        $("#newsContainer-body").html(data["news_item"].text);
+        data = data["news_item"];
+
+        $("#newsContainer-title").text(data["title"]);
+        $("#newsContainer-body").html(data["text"]);
+
+        if (data["liked"]) {
+            $("#newsContainer-believeButtons .negative").addClass("disabled").disable();
+        }
+
+        if (data["disliked"]) {
+            $("#newsContainer-believeButtons .positive").addClass("disabled").disable();
+        }
 
     });
 
