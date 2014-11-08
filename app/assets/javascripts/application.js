@@ -13,3 +13,13 @@
 //= require jquery
 //= require jquery_ujs
 //= require_tree .
+//= require_self
+
+var ws = new WebSocket("ws://" + location.hostname + ":3333/");
+
+ws.onopen = function () {
+  console.log("connected...");
+};
+ws.onmessage = function (evt) {
+  console.log("Получены данные " + event.data);
+};
