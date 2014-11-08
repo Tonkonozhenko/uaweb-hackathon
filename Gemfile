@@ -23,6 +23,8 @@ gem 'russian'
 gem 'font-awesome-rails'
 gem 'seed-fu'
 
+gem 'active_model_serializers'
+
 group :development do
   gem 'letter_opener'
   gem 'quiet_assets'
