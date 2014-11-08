@@ -1,5 +1,5 @@
 html, body {
-  background: asset_url('bg.jpg');
+  //  background: asset_url('bg.jpg');
   overflow: hidden;
   margin: 0;
   padding: 0;
@@ -15,6 +15,10 @@ html, body {
 
 .header-block {
   padding: 1em;
+  padding-top: 0;
+  .header-sub-block {
+    margin-top: -10px
+  }
 }
 
 h1 {
@@ -26,15 +30,29 @@ h1 {
 }
 
 .site-head {
-  font-size: 150%;
-  font-weight: 900;
-  font-style: italic;
-  text-decoration: underline;
+  display: inline-block;
+  position: relative;
+  top: 22px;
+  .big {
+    font-weight: 900;
+    font-size: 150%;
+  }
+  .small {
+    font-weight: normal;
+    font-size: 120%;
+    color: #A1CF64;
+    position: relative;
+    top: -5px
+  }
 }
 
 #menuButton {
   position: relative;
   left: -1em;
+  display: inline-block;
+  padding-right: 0.75em;
+  background-color: #A1CF64;
+  color: #FFFFFF;
 }
 
 #newsContainer {
@@ -90,6 +108,10 @@ h1 {
 .card h1 a {
   color: black;
   text-decoration: none;
+  &:hover {
+    color: #A1CF64;
+    text-decoration: underline;
+  }
 }
 
 .card h1 {
