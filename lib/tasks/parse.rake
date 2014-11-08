@@ -52,10 +52,10 @@ namespace :parse do
   desc 'Get news from sites'
   task index: :environment do
     {
-        # censor: 'http://censor.net.ua/includes/news_ru.xml',
-        # liga_news: 'http://news.liga.net/all/rss.xml',
-        # lig_biz: 'http://biz.liga.net/all/rss.xml',
-        # tsn: 'http://ru.tsn.ua/rss/',
+        censor: 'http://censor.net.ua/includes/news_ru.xml',
+        liga_news: 'http://news.liga.net/all/rss.xml',
+        lig_biz: 'http://biz.liga.net/all/rss.xml',
+        tsn: 'http://ru.tsn.ua/rss/',
         podrobnosti: 'http://podrobnosti.ua/rss/',
         korrespondent: 'http://k.img.com.ua/rss/ru/all_news2.0.xml',
     }.each do |k, v|
