@@ -84,7 +84,11 @@ NewsPage.prototype.load = function (id) {
 
         $.get("http://" + _.app.SERVER_HOSTNAME + ":" + _.app.SERVER_PORT + "/news/"
             + _.currentID + "/comments.json", function (data) {
+
+            $("#newsComments-activity").css("display", _.app.auth.IS_LOGGED ? "block" : "none");
+
             renderComments(data.comments);
+
         });
 
         $("#newsContainer-title").text(data["title"]);
