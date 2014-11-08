@@ -1,4 +1,4 @@
-class User::SessionsController < Devise::SessionsController
+class Users::SessionsController < Devise::SessionsController
   respond_to :html, :json
   # before_filter :configure_sign_in_params, only: [:create]
 
