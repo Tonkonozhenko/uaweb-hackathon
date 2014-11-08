@@ -34,15 +34,26 @@ end
 
 # Returns array of semi-ready news
 def parse_rss(url)
-
+  Nokogiri::XML(open(url)).css('item').map do |item|
+    NewsItem.new(
+        title: item.css('title').text,
+        short_text: item.css('description').text,
+        url: item.css('link').text
+    )
+  end
 end
 
 # Fills missing info for news
 def parse_html(media, news_item)
   Thread.new do
-    send("parse_#{media}", news_item)
+    doc = Nokogiri::HTML(open(news_item.url))
+    send("parse_#{media}", news_item, doc)
     news_item.save
   end
+end
+
+def parse_censor(news_item, doc)
+  news_item.text = doc.css('.hnews/article/.text/h2').inner_html + doc.css('.hnews/article/.text/._ga1_on_').inner_html
 end
 
 namespace :parse do
