@@ -97,7 +97,7 @@ h1 {
   display: block;
   float: left;
   width: 300px;
-  height: 300px;
+//  height: 300px;
 }
 
 .newsGrid > div > div {
@@ -105,7 +105,7 @@ h1 {
 }
 
 .newsGrid > div > div > div {
-  height: 280px !important;
+//  height: 280px !important;
   overflow: hidden;
 }
 
@@ -113,19 +113,24 @@ h1 {
 
 }
 
-.card h1 a {
-  color: black;
-  text-decoration: none;
-  &:hover {
-    color: #A1CF64;
-    text-decoration: underline;
+.card {
+  img {
+    width: 100%;
+    max-height: 270px;
   }
-}
-
-.card h1 {
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
+  h1 {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    a {
+      color: #333;
+      text-decoration: none;
+      &:hover {
+        color: #A1CF64;
+        text-decoration: underline;
+      }
+    }
+  }
 }
 
 .or:before {
