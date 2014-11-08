@@ -17,4 +17,5 @@
 
 /.idea
 /config/database.yml
+/config/redis.yml
 /.env
