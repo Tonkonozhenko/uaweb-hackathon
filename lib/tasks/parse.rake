@@ -35,17 +35,16 @@ end
 def parse_korrespondent(news_item, doc)
   news_item.text = doc.css('.post-item__text').inner_html
   news_item.image = (URI.parse(doc.css('.post-item__photo/img').attribute('src')) rescue nil)
-  # post-item__photo
 end
 
 def parse_liga_news(news_item, doc)
   news_item.text = doc.css('._ga1_on_').inner_html
-  # news_item.image = URI.parse(doc.css('.img/div/img').attribute('src'))
-  # 1.to_s
+  news_item.image = (URI.parse('http://news.liga.net/' + doc.css('#material-image').attribute('src')) rescue nil)
 end
 
 def parse_lig_biz(news_item, doc)
   news_item.text = doc.css('._ga1_on_').inner_html
+  news_item.image = (URI.parse('http://news.liga.net/' + doc.css('#material-image').attribute('src')) rescue nil)
 end
 
 namespace :parse do
