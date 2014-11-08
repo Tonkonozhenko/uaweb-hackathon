@@ -22,7 +22,7 @@ redis_thread = Thread.new do
 end
 
 EM.run do
-  EM::WebSocket.start(host: '127.0.0.1', port: 3333) do |ws|
+  EM::WebSocket.start(host: '0.0.0.0', port: 3333) do |ws|
     ws.onopen { clients << ws }
     ws.onclose { clients.delete ws }
   end
