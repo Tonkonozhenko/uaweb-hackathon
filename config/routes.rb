@@ -10,6 +10,8 @@ Rails.application.routes.draw do
     post 'register/one_click' => 'users/registrations#one_click'
   end
 
+  get 'token' => 'application#token'
+
   root 'news_items#index'
   resources :news_items, path: 'news', only: [:index, :show] do
     member do
