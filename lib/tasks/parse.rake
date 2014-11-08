@@ -68,6 +68,14 @@ def parse_korrespondent(news_item, doc)
   news_item.text = doc.css('.post-item__text').inner_html
 end
 
+def parse_liga_news(news_item, doc)
+  news_item.text = doc.css('._ga1_on_').inner_html
+end
+
+def parse_lig_biz(news_item, doc)
+  news_item.text = doc.css('._ga1_on_').inner_html
+end
+
 namespace :parse do
   desc 'Get news from sites'
   task index: :environment do
