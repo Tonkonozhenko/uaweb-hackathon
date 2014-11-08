@@ -6,4 +6,8 @@ class ApplicationController < ActionController::Base
   def token
 
   end
+
+  def _current_user
+    render user_signed_in? ? { json: current_user, serializer: CurrentUserSerializer } : { json: false }
+  end
 end
