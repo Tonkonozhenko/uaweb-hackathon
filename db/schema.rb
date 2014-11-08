@@ -37,6 +37,7 @@ ActiveRecord::Schema.define(version: 20141108105727) do
     t.integer  "minus_ids",                 array: true
     t.integer  "plus_count",  default: 0
     t.integer  "minus_count", default: 0
+    t.text     "url"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
