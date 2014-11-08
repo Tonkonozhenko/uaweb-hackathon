@@ -6,13 +6,18 @@ var NewsPage = function () {
 
 NewsPage.prototype.init = function () {
 
-    var _ = this;
+    var _ = this,
+        newsID;
 
     $("#newsContainer-backButton").click(function () {
 
         _.close();
 
     });
+
+    if (!isNaN(parseInt(newsID = location.hash.slice(1)))) {
+        this.load(newsID);
+    }
 
 };
 
