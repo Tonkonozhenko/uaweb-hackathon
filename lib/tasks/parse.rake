@@ -6,9 +6,8 @@ require 'nokogiri'
 
 # Liga.net / podrobnosti.ua / korrespondent.net / censor.net.ua
 def get_news
-  urls = ['http://news.liga.net/all/rss.xml', 'http://biz.liga.net/all/rss.xml', 'http://ru.tsn.ua/rss/',
-          'http://podrobnosti.ua/rss/', 'http://k.img.com.ua/rss/ru/all_news2.0.xml',
-          'http://censor.net.ua/includes/news_ru.xml']
+  urls = ['http://censor.net.ua/includes/news_ru.xml', 'http://news.liga.net/all/rss.xml', 'http://biz.liga.net/all/rss.xml', 'http://ru.tsn.ua/rss/',
+          'http://podrobnosti.ua/rss/', 'http://k.img.com.ua/rss/ru/all_news2.0.xml']
   urls.each do |url|
     doc_XML = Nokogiri::XML(open(url))
     items = doc_XML.css('item')
