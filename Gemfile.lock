@@ -17,11 +17,11 @@ GIT
       sass-rails
 
 GIT
-  remote: git://github.com/maxim/bootswatch-rails.git
-  revision: 529f8b9596556b80c9388f63b5a75b25e92af9ed
+  remote: git://github.com/doabit/semantic-ui-sass.git
+  revision: d43beca346cb74f0c3e27212f8acd4f31e1e1629
   specs:
-    bootswatch-rails (3.2.4)
-      railties (>= 3.1)
+    semantic-ui-sass (0.19.3.1)
+      sass (~> 3.2)
 
 GIT
   remote: git://github.com/plataformatec/simple_form.git
@@ -84,8 +84,6 @@ GEM
       rack (>= 0.9.0)
     binding_of_caller (0.7.2)
       debug_inspector (>= 0.0.1)
-    bootstrap-sass (3.3.0.1)
-      sass (~> 3.2)
     bourbon (3.2.3)
       sass (~> 3.2)
       thor
@@ -270,8 +268,6 @@ DEPENDENCIES
   annotate
   better_errors
   binding_of_caller
-  bootstrap-sass
-  bootswatch-rails!
   cancancan
   capistrano (~> 3.2.1)
   capistrano-bundler
@@ -298,6 +294,7 @@ DEPENDENCIES
   sass-rails
   seed-fu
   select2-rails
+  semantic-ui-sass!
   simple_form!
   slim-rails
   spring
