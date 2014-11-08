@@ -2,6 +2,7 @@ class NewsItemsController < ApplicationController
   inherit_resources
   actions :index, :show
   respond_to :json, :html
+  has_scope :by_category, type: :array
 
   before_filter :authenticate_user!, only: [:like, :dislike]
 
