@@ -18,6 +18,8 @@ class NewsItem < ActiveRecord::Base
   has_many :category_news_items
   has_many :categories, through: :category_news_items
 
+  scope :by_category, -> (category_ids) { joins(:category_news_items).where(category_news_items: { category_id: category_ids }) }
+
   validates_presence_of :title, :text, :url
 
   before_save do
