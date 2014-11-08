@@ -4,10 +4,11 @@ require 'nokogiri'
 
 # Sites for parse news
 
-# Liga.net / podrobnosti.ua / korrespondent.net /
+# Liga.net / podrobnosti.ua / korrespondent.net / censor.net.ua
 def get_news
   urls = ['http://news.liga.net/all/rss.xml', 'http://biz.liga.net/all/rss.xml', 'http://ru.tsn.ua/rss/',
-          'http://podrobnosti.ua/rss/', 'http://k.img.com.ua/rss/ru/all_news2.0.xml']
+          'http://podrobnosti.ua/rss/', 'http://k.img.com.ua/rss/ru/all_news2.0.xml',
+          'http://censor.net.ua/includes/news_ru.xml']
   urls.each do |url|
     doc_XML = Nokogiri::XML(open(url))
     items = doc_XML.css('item')
@@ -23,11 +24,31 @@ def get_news
         news.text = doc_HTML.css('._ga1_on_/p').inner_html
       elsif url.eql? 'http://k.img.com.ua/rss/ru/all_news2.0.xml'
         news.text = doc_HTML.css('.post-item__text').inner_html
+      elsif url.eql? 'http://censor.net.ua/includes/news_ru.xml'
+        news.text = doc_HTML.css('.hnews/article/.text/h2').inner_html
+        news.text += doc_HTML.css('.hnews/article/.text/._ga1_on_').inner_html
       end
       news.save
     end
   end
 end
+
+
+# http://censor.net.ua/includes/news_ru.xml
+# def get_news_from_censor_ua
+#   doc_XML = Nokogiri::XML(open('http://censor.net.ua/includes/news_ru.xml'))
+#   items = doc_XML.css('item')
+#   items.each do |item|
+#     news = NewsItem.new
+#     news.title = item.css('title').text
+#     news.short_text = item.css('description').text
+#     news.url = item.css('link').text
+#     doc_HTML = Nokogiri::HTML(open(news.url))
+#     news.text = doc_HTML.css('.hnews/article/.text/h2').inner_html
+#     news.text += doc_HTML.css('.hnews/article/.text/._ga1_on_').inner_html
+#     news.save
+#   end
+# end
 
 # korespondent.ua
 # def get_news_from_podrobnosti_ua
