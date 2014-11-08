@@ -1,0 +1,13 @@
+<% unless user_signed_in? %>
+  <h3>One-click registration: </h3>
+  <%= form_tag register_one_click_path do %>
+    <%= text_field_tag 'email', '' %>
+    <%= submit_tag 'Register' %>
+  <% end %>
+  <hr/>
+<% end %>
+
+<h1><%= resource.title %></h1>
+<%== resource.text %>
+<br/>
+<%= link_to resource.url %>

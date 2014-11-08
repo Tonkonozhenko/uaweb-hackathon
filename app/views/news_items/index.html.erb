@@ -1,0 +1,10 @@
+<table border="1">
+  <% collection.each do |resource| %>
+    <tr>
+      <td><%= link_to resource.id, news_item_path(resource) %></td>
+      <td><%= resource.title %></td>
+      <td><%= resource.text.truncate(100) %></td>
+      <td><%= link_to 'link', resource.url %></td>
+    </tr>
+  <% end %>
+</table>
