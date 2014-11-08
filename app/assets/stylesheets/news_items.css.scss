@@ -13,18 +13,24 @@ html, body {
   overflow: auto;
 }
 
-#menuButton {
-  position: fixed;
-  left: 0;
-  top: 0;
-}
-
 .header-block {
   padding: 1em;
 }
 
 h1 {
   font-size: 120%;
+}
+
+.site-head {
+  font-size: 150%;
+  font-weight: 900;
+  font-style: italic;
+  text-decoration: underline;
+}
+
+#menuButton {
+  position: relative;
+  left: -1em;
 }
 
 #newsContainer {
