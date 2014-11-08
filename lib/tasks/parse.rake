@@ -45,11 +45,9 @@ end
 
 # Fills missing info for news
 def parse_html(media, news_item)
-  Thread.new do
     doc = Nokogiri::HTML(open(news_item.url))
     send("parse_#{media}", news_item, doc)
     news_item.save
-  end
 end
 
 def parse_censor(news_item, doc)
