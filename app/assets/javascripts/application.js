@@ -21,5 +21,5 @@ ws.onopen = function () {
   console.log("connected...");
 };
 ws.onmessage = function (evt) {
-  console.log("Получены данные " + event.data);
+//  console.log("Получены данные " + event.data);
 };

@@ -1,11 +1,16 @@
-<% unless user_signed_in? %>
+<% if user_signed_in? %>
+  <%= link_to 'Верю', like_news_item_path, method: :post, remote: true %>
+  /
+  <%= link_to 'Неверю', dislike_news_item_path, method: :post, remote: true %>
+<% else %>
   <h3>One-click registration: </h3>
   <%= form_tag register_one_click_path do %>
     <%= text_field_tag 'email', '' %>
     <%= submit_tag 'Register' %>
   <% end %>
-  <hr/>
 <% end %>
+
+<hr/>
 
 <h1><%= resource.title %></h1>
 <%== resource.text %>

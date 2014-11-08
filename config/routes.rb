@@ -10,5 +10,10 @@ Rails.application.routes.draw do
   end
 
   root 'news_items#index'
-  resources :news_items, path: 'news', only: [:index, :show]
+  resources :news_items, path: 'news', only: [:index, :show] do
+    member do
+      post 'like'
+      post 'dislike'
+    end
+  end
 end
