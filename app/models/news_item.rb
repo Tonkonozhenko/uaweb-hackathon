@@ -44,7 +44,7 @@ class NewsItem < ActiveRecord::Base
 
   def liked_by?(user)
     id = user.is_a?(User) ? user.id : user
-    !plus_ids.index(id).nil?
+    !(plus_ids.index(id).nil?)
   end
 
   def disliked_by?(user)
