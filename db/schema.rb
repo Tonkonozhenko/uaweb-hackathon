@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141108105727) do
+ActiveRecord::Schema.define(version: 20141108124509) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -32,14 +32,19 @@ ActiveRecord::Schema.define(version: 20141108105727) do
   create_table "news_items", force: true do |t|
     t.string   "title"
     t.text     "text"
-    t.float    "rating",      default: 0.0
-    t.integer  "plus_ids",                  array: true
-    t.integer  "minus_ids",   default: [],  array: true
-    t.integer  "plus_count",  default: 0
-    t.integer  "minus_count", default: 0
+    t.float    "rating",             default: 0.0
+    t.integer  "plus_ids",                         array: true
+    t.integer  "minus_ids",          default: [],  array: true
+    t.integer  "plus_count",         default: 0
+    t.integer  "minus_count",        default: 0
     t.text     "url"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.text     "short_text"
+    t.string   "image_file_name"
+    t.string   "image_content_type"
+    t.integer  "image_file_size"
+    t.datetime "image_updated_at"
   end
 
   add_index "news_items", ["rating"], name: "index_news_items_on_rating", using: :btree
