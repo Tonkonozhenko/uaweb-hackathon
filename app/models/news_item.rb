@@ -19,4 +19,51 @@ class NewsItem < ActiveRecord::Base
   has_many :categories, through: :category_news_items
 
   validates_presence_of :title, :text, :url
+
+  before_save do
+    if rating_change
+
+    end
+  end
+
+  def plus!(id)
+    plus_ids << id
+    plus_ids_will_change!
+    self.plus_count += 1
+    calculate_rating!
+    save
+  end
+
+  def minus!(id)
+    minus_ids << id
+    minus_ids_will_change!
+    self.minus_count += 1
+    calculate_rating!
+    save
+  end
+
+  def liked_by?(user)
+    id = user.is_a?(User) ? user.id : user
+    !plus_ids.index(id).nil?
+  end
+
+  def disliked_by?(user)
+    id = user.is_a?(User) ? user.id : user
+    !minus_ids.index(id).nil?
+  end
+
+  def calculate_rating!
+    self.rating = wilson_score
+  end
+
+  # http://habrahabr.ru/company/darudar/blog/143188/
+  def wilson_score
+    up = plus_count
+    down = minus_count
+    return -down unless up
+    n = plus_count + minus_count
+    z = 1.64485
+    phat = up.to_f / n
+    (phat + z * z / (2 * n) - z * Math.sqrt((phat * (1 - phat) + z * z / (4 * n)) / n))/(1 + z * z / n)
+  end
 end

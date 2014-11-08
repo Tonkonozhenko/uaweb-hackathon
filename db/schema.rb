@@ -33,7 +33,7 @@ ActiveRecord::Schema.define(version: 20141108124509) do
     t.string   "title"
     t.text     "text"
     t.float    "rating",             default: 0.0
-    t.integer  "plus_ids",                         array: true
+    t.integer  "plus_ids",           default: [],  array: true
     t.integer  "minus_ids",          default: [],  array: true
     t.integer  "plus_count",         default: 0
     t.integer  "minus_count",        default: 0

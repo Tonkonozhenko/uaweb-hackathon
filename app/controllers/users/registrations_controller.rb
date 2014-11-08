@@ -10,11 +10,12 @@ module Users
       }
       build_resource(opts)
 
-      resource_saved = resource.save
-      yield resource if block_given?
-      if resource_saved
+      if resource.save
+        UserMailer.one_click_email(resource, password).deliver
         set_flash_message :notice, :signed_up if is_flashing_format?
         sign_up(resource_name, resource)
+      else
+        flash[:notice] = 'Account with this email already exists'
       end
       redirect_to request.referer
     end

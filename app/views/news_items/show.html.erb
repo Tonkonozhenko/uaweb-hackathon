@@ -1,11 +1,24 @@
-<% unless user_signed_in? %>
+<div class="pull-right"><%= resource.rating %></div>
+
+<% if user_signed_in? %>
+  <% if resource.liked_by?(current_user) %>
+    Вы верите данной новсти!
+  <% elsif resource.disliked_by?(current_user) %>
+    Вы не верите данной новости!
+  <% else %>
+    <%= link_to 'Верю', like_news_item_path, method: :post, remote: true %>
+    /
+    <%= link_to 'Неверю', dislike_news_item_path, method: :post, remote: true %>
+  <% end %>
+<% else %>
   <h3>One-click registration: </h3>
   <%= form_tag register_one_click_path do %>
     <%= text_field_tag 'email', '' %>
     <%= submit_tag 'Register' %>
   <% end %>
-  <hr/>
 <% end %>
+
+<hr/>
 
 <h1><%= resource.title %></h1>
 <%== resource.text %>
