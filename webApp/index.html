@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <title>WorldNewsCenter</title>
+    <link rel="stylesheet" href="css/semantic.min.css"/>
+    <link rel="stylesheet" href="css/app/index.css"/>
+    <script type="text/javascript" src="js/jquery.min.js"></script>
+    <script type="text/javascript" src="js/semantic.min.js"></script>
+    <script type="text/javascript" src="js/app/App.js"></script>
+    <script type="text/javascript" src="js/app/NewsPage.js"></script>
+</head>
+<body onload="app = new App();">
+    <div class="mainPage">
+        <div class="header-block">
+            <h1>New generation news</h1>
+        </div>
+        <div class="ui left sidebar" id="menu">
+            <a class="hide item">
+                <i class="close icon"></i> Close Menu
+            </a>
+            <div class="item">
+                <a href="/">
+                    <b>Introduction</b>
+                </a>
+                <div class="menu">
+                    <a class="item">Link 1</a>
+                    <a class="item">Link 2</a>
+                </div>
+            </div>
+            <div class="item">
+                <b>Categories</b>
+                <div class="menu">
+                    <a class="item">Category 1</a>
+                    <a class="item">Category 2...</a>
+                </div>
+            </div>
+        </div>
+        <div class="newsGrid" id="newsFeedContainer">
+
+        </div>
+    </div>
+    <div id="newsContainer">
+        <div>
+            <div class="ui down button" id="newsContainer-backButton">
+                <i class="user icon"></i>
+                Назад
+            </div>
+        </div>
+        <h1 id="newsContainer-title">News header</h1>
+        <p id="newsContainer-body">
+            News body
+        </p>
+    </div>
+</body>
+</html>
