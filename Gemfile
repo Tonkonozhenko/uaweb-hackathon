@@ -1,0 +1,49 @@
+source 'https://rubygems.org'
+
+gem 'rails'
+gem 'pg'
+gem 'dotenv-rails'
+
+gem 'jquery-rails'
+gem 'sass-rails'
+gem 'uglifier'
+gem 'coffee-rails'
+gem 'bootstrap-sass'
+gem 'bootswatch-rails', github: 'maxim/bootswatch-rails'
+gem 'jbuilder'
+gem 'slim-rails'
+
+gem 'devise'
+gem 'responders', '~> 1.0.0'
+gem 'has_scope'
+
+gem 'kaminari'
+gem 'activeadmin', github: 'activeadmin'
+gem 'cancancan'
+gem 'simple_form', github: 'plataformatec/simple_form'
+gem 'rails-i18n'
+gem 'russian'
+gem 'font-awesome-rails'
+gem 'handlebars_assets'
+gem 'active_model_serializers'
+
+gem 'lodash-rails'
+gem 'seed-fu'
+gem 'select2-rails'
+
+gem 'paranoia', github: 'radar/paranoia', branch: 'rails4'
+
+group :development do
+  gem 'letter_opener'
+  gem 'quiet_assets'
+  gem 'annotate'
+  gem 'thin'
+  gem 'better_errors'
+  gem 'binding_of_caller'
+  gem 'spring'
+
+  gem 'capistrano', '~> 3.2.1'
+  gem 'capistrano-rails'
+  gem 'capistrano-bundler'
+  gem 'capistrano-rvm'
+end
