@@ -14,36 +14,74 @@ Auth.prototype.init = function () {
 
     var _ = this;
 
-    $("#button-login").click(function () {
-        $("#loginModal").modal("show");
-    });
+    var loginf = function (l) {
 
-    $("#loginModal").submit(function () {
+        l = l || {};
 
-        var login = $("#loginModal input[name=login]").val(),
-            password = $("#loginModal input[name=password]").val();
+        var login = l.login || $("#loginModal input[name=login]").val(),
+            password = l.password || $("#loginModal input[name=password]").val();
 
         if (login && password) {
 
             var success = function (data) {
 
+                $("#menu-register").remove();
+                $("#menu-login").html("<i class=\"user icon\"></i>" + login);
+                $("#loginModal").modal("hide");
                 console.log(data);
 
             };
 
-            $.ajax({
-                type: "POST",
-                url: "http://" + _.app.SERVER_HOSTNAME + ":" + _.app.SERVER_PORT + "/login",
-                data: {
-                    "user[email]": login,
-                    "user[password]": password
-                },
-                success: success,
-                dataType: "text/json"
+            console.log("Login with...", {
+                "user[email]": login,
+                "user[password]": password
             });
+
+            $.post("http://" + _.app.SERVER_HOSTNAME + ":" + _.app.SERVER_PORT + "/login.json", {
+                "user[email]": login,
+                "user[password]": password
+            }).done(success);
 
         }
 
+    };
+
+    $("#menu-login").click(function () {
+        $("#loginModal").modal("show");
     });
+
+    $("#menu-register").click(function () {
+        $("#registerModal").modal("show");
+    });
+
+    $("#registerModal").submit(function () {
+
+        var login = $("#registerModal input[name=login]").val(),
+            p1 = $("#registerModal input[name=password]").val(),
+            p2 = $("#registerModal input[name=confirmPassword]").val();
+
+        if (p1 !== p2) return;
+        if (login === "" || p1 === "") return;
+
+        $("#registerModal").modal("hide");
+
+        $.post("http://" + _.app.SERVER_HOSTNAME + ":" + _.app.SERVER_PORT + "/register.json", {
+            "user[email]": login,
+            "user[password]": p1,
+            "user[password_confirmation]": p2
+        }).done(function (e) {
+
+            if ((e || {}).user) {
+                loginf({
+                    login: login,
+                    password: p1
+                });
+            }
+
+        });
+
+    });
+
+    $("#loginModal").submit(loginf);
 
 };

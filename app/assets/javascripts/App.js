@@ -8,6 +8,8 @@ var App = function () {
 
     this.server = new Server(this);
 
+    this.comments = new Comments(this);
+
     this.auth = new Auth(this);
 
     this.init();
@@ -24,14 +26,18 @@ App.prototype.init = function () {
 
     });
 
+    $("#menuButton").click(function () {
+        $("#menu").sidebar("toggle");
+    });
+
     var self = this;
     $.ajax({
-      url: '/news.json',
-      success: function(data) {
-        data.news_items.forEach(function(news_item) {
-          self.appendCard(news_item);
-        });
-      }
+        url: '/news.json',
+        success: function(data) {
+            data.news_items.forEach(function(news_item) {
+                self.appendCard(news_item);
+            });
+        }
     });
 
 //    this.appendCard({
@@ -68,7 +74,7 @@ App.prototype.appendCard = function (data) {
     var _ = this,
         d1 = $("<div></div>"),
         d2 = $("<div></div>"),
-        d3 = $("<div class='ui card instructive segment'></div>"),
+        d3 = $("<div class='ui card stacked segment'></div>"),
         h1 = $("<h1></h1>"),
         a =  $("<a href=\"#" + data.id + "\">" + data.title + "</a>"),
         divider = $("<div class='ui divider'></div>"),
