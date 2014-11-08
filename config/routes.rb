@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  root 'news_items#index'
+
   devise_for :users, path: '', path_names: { sign_in: 'login', sign_out: 'logout',
                                              registration: 'register', sign_up: '/' },
              controllers: {
@@ -11,7 +13,6 @@ Rails.application.routes.draw do
 
   get 'token' => 'application#token'
 
-  root 'news_items#index'
   resources :news_items, path: 'news', only: [:index, :show] do
     resources :comments, only: [:index, :create]
     member do
@@ -19,4 +20,5 @@ Rails.application.routes.draw do
       post 'dislike'
     end
   end
+  resources :categories, actions: [:index]
 end
