@@ -14,6 +14,14 @@ Auth.prototype.init = function () {
 
     var _ = this;
 
+    var makeLogin = function (login) {
+
+        $("#menu-register").remove();
+        $("#menu-login").html("<i class=\"user icon\"></i>" + login);
+        $("#loginModal").modal("hide");
+
+    };
+
     var loginf = function (l) {
 
         l = l || {};
@@ -23,13 +31,8 @@ Auth.prototype.init = function () {
 
         if (login && password) {
 
-            var success = function (data) {
-
-                $("#menu-register").remove();
-                $("#menu-login").html("<i class=\"user icon\"></i>" + login);
-                $("#loginModal").modal("hide");
-                console.log(data);
-
+            var success = function () {
+                makeLogin(login);
             };
 
             console.log("Login with...", {
@@ -53,6 +56,14 @@ Auth.prototype.init = function () {
     $("#menu-register").click(function () {
         $("#registerModal").modal("show");
     });
+
+    $.get("http://" + _.app.SERVER_HOSTNAME + ":" + _.app.SERVER_PORT + "/current_user.json",
+        function (d) {
+            d = d["current_user"] || {};
+            if (d.email) {
+                makeLogin(d.email);
+            }
+        });
 
     $("#registerModal").submit(function () {
 
