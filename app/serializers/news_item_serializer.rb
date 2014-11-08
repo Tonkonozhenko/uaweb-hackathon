@@ -1,5 +1,5 @@
 class NewsItemSerializer < ActiveModel::Serializer
-  attributes :id, :title, :text, :url, :short_text, :liked, :disliked, :image_url
+  attributes :id, :title, :text, :url, :short_text, :liked, :disliked, :image_url, :rating
   delegate :current_user, to: :scope
 
   def liked
