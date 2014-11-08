@@ -56,6 +56,7 @@ NewsPage.prototype.load = function (id) {
     //$("#newsContainer").sidebar("toggle");
 
     $("#newsContainer").css("left", "0");
+    $("#menu").sidebar("hide");
 
     $.get("http://" + this.app.SERVER_HOSTNAME + ":" + this.app.SERVER_PORT
         + "/news/1.json", function (data) {

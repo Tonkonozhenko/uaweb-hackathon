@@ -14,7 +14,7 @@ Auth.prototype.init = function () {
 
     var _ = this;
 
-    $("#button-login").click(function () {
+    $("#menu-login").click(function () {
         $("#loginModal").modal("show");
     });
 
@@ -30,6 +30,9 @@ Auth.prototype.init = function () {
                 console.log(data);
 
             };
+
+            $("#menu-login").html("<i class=\"user icon\"></i>test@mail.test");
+            $("#loginModal").modal("hide");
 
             $.ajax({
                 type: "POST",

@@ -1,35 +1,34 @@
+<div class="ui green vertical demo sidebar menu" id="menu">
+    <a class="active item" id="menu-login">
+        <i class="lock icon"></i>
+        Войти
+    </a>
+    <a class="item">
+        <i class="comment icon"></i>
+        Отзыв разработчикам
+    </a>
+    <a class="item">
+        <i class="warning icon"></i>
+        Сообщить о нарушении
+    </a>
+    <div class="item">
+        <b>Категории</b>
+        <div class="menu">
+            <a class="item">Политика</a>
+            <a class="item">Наука</a>
+            <a class="item">Спорт</a>
+        </div>
+    </div>
+</div>
+
 <div class="mainPage">
   <div class="header-block">
     <div>
-      <div class="ui positive button" id="button-login">
-        <i class="ui lock icon"></i>
-        Вход
-      </div>
-    </div>
-    <h1>New generation news</h1>
-  </div>
-  <div class="ui left sidebar" id="menu">
-    <a class="hide item">
-      <i class="close icon"></i> Close Menu
-    </a>
-
-    <div class="item">
-      <a href="/">
-        <b>Introduction</b>
-      </a>
-
-      <div class="menu">
-        <a class="item">Link 1</a>
-        <a class="item">Link 2</a>
-      </div>
-    </div>
-    <div class="item">
-      <b>Categories</b>
-
-      <div class="menu">
-        <a class="item">Category 1</a>
-        <a class="item">Category 2...</a>
-      </div>
+        <span id="menuButton" class="ui launch right attached button">
+            <i class="icon list layout"></i>
+            <span class="text">Меню</span>
+        </span>
+        <span class="site-head">New generation news</span>
     </div>
   </div>
   <div class="newsGrid" id="newsFeedContainer">
@@ -42,6 +41,10 @@
       <i class="left icon"></i>
       Назад
     </div>
+      <div class="ui down button" id="newsContainer-backButton">
+          <i class="star yellow icon"></i>
+          Сохранить
+      </div>
   </div>
   <div>
     <div class="ui card instructive segment">
@@ -101,8 +104,3 @@
     </button>
   </div>
 </form>
-
-<div id="menuButton" class="ui launch right attached button" style="width: 70px;">
-  <i class="icon list layout"></i>
-  <span class="text" style="display: none;">Menu</span>
-</div>
