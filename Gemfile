@@ -22,6 +22,7 @@ gem 'rails-i18n'
 gem 'russian'
 gem 'font-awesome-rails'
 gem 'seed-fu'
+gem 'paperclip'
 
 gem 'active_model_serializers'
 gem 'redis'
