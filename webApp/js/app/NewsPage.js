@@ -1,5 +1,19 @@
 var NewsPage = function () {
 
+    this.init();
+
+};
+
+NewsPage.prototype.init = function () {
+
+    var _ = this;
+
+    $("#newsContainer-backButton").click(function () {
+
+        _.close();
+
+    });
+
 };
 
 NewsPage.prototype.load = function (id) {
@@ -16,5 +30,11 @@ NewsPage.prototype.load = function (id) {
         $("#newsContainer-body").html(data["news_item"].text);
 
     });
+
+};
+
+NewsPage.prototype.close = function () {
+
+    $("#newsContainer").css("left", "100%");
 
 };

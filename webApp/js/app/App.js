@@ -8,6 +8,8 @@ var App = function () {
 
 App.prototype.init = function () {
 
+    var _ = this;
+
     $("#newsContainer").sidebar({
         transition: "push"
     }); //.sidebar("attach events", "#test");

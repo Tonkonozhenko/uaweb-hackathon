@@ -1,10 +1,21 @@
 html, body {
     background: url(../../img/bg.jpg);
-    overflow-x: hidden;
+    overflow: hidden;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.mainPage {
+    width: 100%;
+    height: 100%;
+    overflow: auto;
 }
 
 #newsContainer {
     position: fixed;
+    padding: 1em;
     overflow: auto;
     left: 100%;
     top: 0;
@@ -12,6 +23,7 @@ html, body {
     height: 100%;
     background: url(../../img/bg.jpg);
     border-left: 1px solid black;
+    -webkit-transition: left .5s ease;
 }
 
 .ui.active.right.very.wide.sidebar {
