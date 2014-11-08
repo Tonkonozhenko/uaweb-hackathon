@@ -16,8 +16,6 @@ class NewsItemsController < ApplicationController
   end
 
   def dislike
-    current_user_id = current_user.id
-
     ok =
         if resource.liked_by?(current_user) || resource.disliked_by?(current_user)
           false
