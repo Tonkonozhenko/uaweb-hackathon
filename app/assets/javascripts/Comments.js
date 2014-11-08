@@ -19,7 +19,11 @@ Comments.prototype.init = function () {
         $.post("news/" + _.app.newsPage.currentID + "/comments.json", {
             "comment[text]": $("#comment-textarea").val()
         }).done(function (data) {
+            data = data || {};
             console.log("COMMENT:", data);
+            if (data["comment"]) {
+                // todo: reload comments
+            }
         });
 
     });

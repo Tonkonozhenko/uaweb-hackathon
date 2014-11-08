@@ -51,17 +51,39 @@ NewsPage.prototype.init = function () {
 
 NewsPage.prototype.load = function (id) {
 
+    var _ = this;
+
     location.hash = "#" + id;
+
+    this.currentID = id;
 
     //$("#newsContainer").sidebar("toggle");
 
     $("#newsContainer").css("left", "0");
     $("#menu").sidebar("hide");
 
+    var renderComments = function (arr) {
+
+        for (var i in arr) {
+
+            var c = arr[i];
+
+            $("#newsComments").append("<div class=\"ui segment\">" + c.text.replace(/</g, "&lt;")
+                + "</div>");
+
+        }
+
+    };
+
     $.get("http://" + this.app.SERVER_HOSTNAME + ":" + this.app.SERVER_PORT
         + "/news/1.json", function (data) {
 
         data = data["news_item"];
+
+        $.get("http://" + _.app.SERVER_HOSTNAME + ":" + _.app.SERVER_PORT + "/news/"
+            + _.currentID + "/comments.json", function (data) {
+            renderComments(data.comments);
+        });
 
         $("#newsContainer-title").text(data["title"]);
         $("#newsContainer-body").html(data["text"]);
