@@ -64,6 +64,8 @@ NewsPage.prototype.load = function (id) {
 
     var renderComments = function (arr) {
 
+        $("#newsComments").html("");
+
         for (var i in arr) {
 
             var c = arr[i];
