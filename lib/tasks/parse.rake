@@ -17,7 +17,8 @@ def parse_html(media, news_item)
   doc = Nokogiri::HTML(open(news_item.url))
   send("parse_#{media}", news_item, doc)
   news_item.save
-  category = Category.where(title: (news_item.url).split('/')[4]).first_or_create
+  cat = doc.css('.menu .table .selected a').text
+  category = Category.where(title: cat).first_or_create
   CategoryNewsItem.new(category_id: category.id, news_item_id: news_item.id).save
 end
 
@@ -46,7 +47,7 @@ end
 
 def parse_lig_biz(news_item, doc)
   news_item.text = doc.css('._ga1_on_').inner_html
-  news_item.image = (URI.parse('http://news.liga.net/' + doc.css('#material-image').attribute('src')) rescue nil)
+  news_item.image = (URI.parse('http://biz.liga.net/' + doc.css('#material-image').attribute('src')) rescue nil)
 end
 
 namespace :parse do
