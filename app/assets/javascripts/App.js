@@ -1,3 +1,8 @@
+/**
+ * Main entry point for NGNews application.
+ *
+ * @constructor
+ */
 var App = function () {
 
     this.SERVER_HOSTNAME = location.hostname;
