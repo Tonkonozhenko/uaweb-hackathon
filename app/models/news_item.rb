@@ -17,6 +17,7 @@
 class NewsItem < ActiveRecord::Base
   has_many :category_news_items
   has_many :categories, through: :category_news_items
+  belongs_to :media
 
   has_attached_file :image, styles: { big: '480x270>', medium: '320x240>', thumb: '160x180>' }
   validates_attachment_content_type :image, :content_type => ["image/jpg", "image/jpeg", "image/png", "image/gif"]
@@ -26,9 +27,9 @@ class NewsItem < ActiveRecord::Base
 
   validates_presence_of :title, :text, :url
 
-  after_create {
-    $redis.publish 'ngnews', NewsItemSerializer.new(self).to_json
-  }
+  after_create { $redis.publish 'ngnews', NewsItemSerializer.new(self).to_json }
+
+  before_save { media.touch if rating_changed? }
 
   has_many :comments
 
