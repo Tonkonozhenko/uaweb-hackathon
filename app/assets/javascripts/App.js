@@ -61,7 +61,7 @@ App.prototype.appendCard = function (data) {
     h1.append(a);
     d3.append(img);
     d3.append(h1);
-    d3.append(rating);
+    if (data.rating !== 0.0) d3.append(rating);
     d3.append(divider);
 //    d3.append(divider);
 //    d3.append(p);
