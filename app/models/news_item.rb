@@ -29,7 +29,7 @@ class NewsItem < ActiveRecord::Base
 
   after_create { $redis.publish 'ngnews', NewsItemSerializer.new(self).to_json }
 
-  before_save { media.touch if rating_changed? }
+  after_save { media.calculate_rating! }
 
   has_many :comments
 
@@ -41,7 +41,7 @@ class NewsItem < ActiveRecord::Base
     plus_ids << id
     plus_ids_will_change!
     self.plus_count += 1
-    calculate_rating!
+    calculate_rating
     save
   end
 
@@ -49,7 +49,7 @@ class NewsItem < ActiveRecord::Base
     minus_ids << id
     minus_ids_will_change!
     self.minus_count += 1
-    calculate_rating!
+    calculate_rating
     save
   end
 
@@ -63,7 +63,7 @@ class NewsItem < ActiveRecord::Base
     !minus_ids.index(id).nil?
   end
 
-  def calculate_rating!
+  def calculate_rating
     self.rating = wilson_score
   end
 

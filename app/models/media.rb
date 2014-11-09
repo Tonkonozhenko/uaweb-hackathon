@@ -1,13 +1,9 @@
 class Media < ActiveRecord::Base
   has_many :news_items
 
-  def touch
-    calculate_rating!
-    super
-  end
-
   def calculate_rating!
     self.rating = wilson_score
+    puts "saved? => #{save}"
   end
 
   # http://habrahabr.ru/company/darudar/blog/143188/
