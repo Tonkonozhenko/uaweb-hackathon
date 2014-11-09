@@ -37,7 +37,7 @@ Server.prototype.init = function () {
 
     this.ws.onmessage = function (e) {
         try {
-            _.onData.call(_, JSON.parse(e.data));
+            _.onData.call(_, JSON.parse(e.data).news_item);
         } catch (e) { console.error("Unable to retrieve data from server.", e); }
     };
 
