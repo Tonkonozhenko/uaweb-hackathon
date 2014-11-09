@@ -38,10 +38,11 @@
     </div>
     <div class="item">
         <b>Категории</b>
-        <div class="menu">
-            <a class="item">Политика</a>
-            <a class="item">Наука</a>
-            <a class="item">Спорт</a>
+        <div class="menu" id="sidebar-categories">
+            <% @categories = Category.all %>
+            <% @categories.each do |category| %>
+            <%= link_to category.title, "#category-#{category.id}", class: 'item news-categories' %>
+            <% end %>
         </div>
     </div>
 </div>

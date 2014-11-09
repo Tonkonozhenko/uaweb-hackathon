@@ -12,6 +12,8 @@ var App = function () {
 
     this.auth = new Auth(this);
 
+    this.sidebar = new Sidebar(this);
+
     this.init();
 
 };
@@ -30,9 +32,28 @@ App.prototype.init = function () {
         $("#menu").sidebar("toggle");
     });
 
+    this.setMainNews();
+
+};
+
+/**
+ * @param {number} cat
+ */
+App.prototype.setMainNews = function (cat) {
+
+    var category,
+        urlP = "";
+
+    if (!isNaN(category = cat || parseInt(location.hash.slice(10)))) { // category-
+        urlP = "?by_category[]=" + category;
+    }
+
     var self = this;
+
+    $("#newsFeedContainer").empty();
+
     $.ajax({
-        url: '/news.json',
+        url: '/news.json' + urlP,
         success: function(data) {
             data.news_items.forEach(function(news_item) {
                 self.appendCard(news_item);

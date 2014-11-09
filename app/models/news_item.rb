@@ -27,7 +27,7 @@ class NewsItem < ActiveRecord::Base
 
   validates_presence_of :title, :text, :url
 
-  after_create { $redis.publish 'ngnews', NewsItemSerializer.new(self).to_json }
+  # after_create { $redis.publish 'ngnews', NewsItemSerializer.new(self).to_json }
 
   after_save { media.calculate_rating! }
 
