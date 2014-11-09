@@ -28,17 +28,22 @@ NewsPage.prototype.init = function () {
 
     $("#newsContainer-believeButton").click(function () {
 
-        $.post("http://" + _.app.SERVER_HOSTNAME + ":" + _.app.SERVER_PORT + "/news/" + _.currentID + "/like",
-            function () {
-            console.log("Sent believe.");
+        $.post("http://" + _.app.SERVER_HOSTNAME + ":" + _.app.SERVER_PORT + "/news/"
+            + _.currentID + "/like", function () {
+                console.log("Sent believe to " +
+                    "http://" + _.app.SERVER_HOSTNAME + ":" + _.app.SERVER_PORT + "/news/"
+                        + _.currentID + "/like");
         });
 
     });
 
     $("#newsContainer-notBelieveButton").click(function () {
 
-        $.post("news/" + _.currentID + "/dislike", function () {
-            console.log("Sent not believe.");
+        $.post("http://" + _.app.SERVER_HOSTNAME + ":" + _.app.SERVER_PORT + "news/" + _.currentID
+            + "/dislike", function () {
+                console.log("Sent not believe to " + "http://" + _.app.SERVER_HOSTNAME + ":" +
+                    _.app.SERVER_PORT + "news/" + _.currentID
+                        + "/dislike");
         });
 
     });

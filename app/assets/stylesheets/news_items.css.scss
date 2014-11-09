@@ -54,6 +54,22 @@ h1 {
   }
 }
 
+.card {
+  position: relative;
+}
+
+.card .rating {
+  position: absolute;
+  left: 20%;
+  top: .5em;
+  width: 60%;
+  opacity: .6;
+}
+
+.card:hover .rating {
+  display: block !important;
+}
+
 #menuButton {
   position: relative;
   left: -1em;
