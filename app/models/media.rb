@@ -3,7 +3,6 @@ class Media < ActiveRecord::Base
 
   def calculate_rating!
     self.rating = wilson_score
-    puts "saved? => #{save}"
   end
 
   # http://habrahabr.ru/company/darudar/blog/143188/
