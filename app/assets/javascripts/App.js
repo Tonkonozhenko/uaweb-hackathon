@@ -9,6 +9,8 @@ var App = function () {
     this.SERVER_PORT = 3000;
     this.WS_PORT = 3333;
 
+    /* modules */
+
     this.newsPage = new NewsPage(this);
 
     this.server = new Server(this);
@@ -27,10 +29,6 @@ App.prototype.init = function () {
 
     $("#newsContainer").sidebar({
         transition: "push"
-    }); //.sidebar("attach events", "#test");
-
-    $(window).resize(function () {
-
     });
 
     $("#menuButton").click(function () {
@@ -42,7 +40,9 @@ App.prototype.init = function () {
 };
 
 /**
- * @param {number} cat
+ * Request server and render main news cards.
+ *
+ * @param {number} [cat]
  */
 App.prototype.setMainNews = function (cat) {
 
@@ -68,6 +68,11 @@ App.prototype.setMainNews = function (cat) {
 
 };
 
+/**
+ * Add one card to general page.
+ *
+ * @param {Object} data
+ */
 App.prototype.appendCard = function (data) {
 
     var _ = this,

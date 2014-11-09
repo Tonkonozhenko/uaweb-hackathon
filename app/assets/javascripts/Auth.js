@@ -1,4 +1,6 @@
 /**
+ * Authorization methods.
+ *
  * @param {App} app
  * @constructor
  */
@@ -6,6 +8,11 @@ var Auth = function (app) {
 
     this.app = app;
 
+    /**
+     * Shows if client is logged in.
+     *
+     * @type {boolean}
+     */
     this.IS_LOGGED = false;
 
     this.init();

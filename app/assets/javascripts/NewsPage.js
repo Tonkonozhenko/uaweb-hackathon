@@ -1,4 +1,6 @@
 /**
+ * News page methods.
+ *
  * @param {App} app
  * @constructor
  */

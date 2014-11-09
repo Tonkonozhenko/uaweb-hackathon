@@ -1,4 +1,6 @@
 /**
+ * Sidebar methods.
+ *
  * @param {App} app
  * @constructor
  */

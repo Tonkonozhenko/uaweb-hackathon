@@ -1,4 +1,6 @@
 /**
+ * Submit comments methods.
+ *
  * @param {App} app
  * @constructor
  */

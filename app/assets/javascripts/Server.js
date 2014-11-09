@@ -1,4 +1,6 @@
 /**
+ * Server connection and request methods. WebSocket pooling controller.
+ *
  * @param {App} app
  * @constructor
  */
