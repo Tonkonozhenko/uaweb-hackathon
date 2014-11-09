@@ -19,7 +19,9 @@ def parse_html(media, news_item)
   doc = Nokogiri::HTML(open(news_item.url))
   send("parse_#{media}", news_item, doc)
   news_item.save
-  news_item.categories << Category.where(title: (news_item.url).split('/')[4]).first_or_create
+  cat = doc.css('.menu table .selected a').text
+  cat = 'Другие' if cat.eql? ''
+  news_item.categories << Category.where(title: cat).first_or_create
 end
 
 def parse_censor(news_item, doc)
