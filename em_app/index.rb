@@ -16,6 +16,7 @@ clients = []
 redis_thread = Thread.new do
   $redis.subscribe chanel_name do |on|
     on.message do |_, msg|
+      'New post!'
       clients.each { |ws| ws.send msg }
     end
   end

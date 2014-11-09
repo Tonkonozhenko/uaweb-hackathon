@@ -26,6 +26,10 @@ class NewsItem < ActiveRecord::Base
 
   validates_presence_of :title, :text, :url
 
+  after_create {
+    $redis.publish 'ngnews', NewsItemSerializer.new(self).to_json
+  }
+
   has_many :comments
 
   scope :by_category, -> (category_ids) { joins(:category_news_items).where(category_news_items: { category_id: category_ids }) }
