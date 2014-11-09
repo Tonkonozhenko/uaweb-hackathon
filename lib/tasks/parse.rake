@@ -17,6 +17,8 @@ def parse_html(media, news_item)
   doc = Nokogiri::HTML(open(news_item.url))
   send("parse_#{media}", news_item, doc)
   news_item.save
+  category = Category.where(title: (news_item.url).split('/')[4]).first_or_create
+  CategoryNewsItem.new(category_id: category.id, news_item_id: news_item.id).save
 end
 
 def parse_censor(news_item, doc)
@@ -53,7 +55,7 @@ namespace :parse do
     {
         # censor: 'http://censor.net.ua/includes/news_ru.xml',
         liga_news: 'http://news.liga.net/all/rss.xml',
-        # lig_biz: 'http://biz.liga.net/all/rss.xml',
+        lig_biz: 'http://biz.liga.net/all/rss.xml',
         # tsn: 'http://ru.tsn.ua/rss/',
         # podrobnosti: 'http://podrobnosti.ua/rss/',
         # korrespondent: 'http://k.img.com.ua/rss/ru/all_news2.0.xml',
