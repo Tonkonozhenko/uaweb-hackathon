@@ -2,9 +2,11 @@ require 'open-uri'
 require 'nokogiri'
 
 # Returns array of semi-ready news
-def parse_rss(url)
+def parse_rss(media)
+  url = media.url
   Nokogiri::XML(open(url)).css('item').map do |item|
     NewsItem.new(
+        media: media,
         title: item.css('title').text,
         short_text: item.css('description').text,
         url: item.css('link').text
@@ -17,9 +19,7 @@ def parse_html(media, news_item)
   doc = Nokogiri::HTML(open(news_item.url))
   send("parse_#{media}", news_item, doc)
   news_item.save
-  cat = doc.css('.menu .table .selected a').text
-  category = Category.where(title: cat).first_or_create
-  CategoryNewsItem.new(category_id: category.id, news_item_id: news_item.id).save
+  news_item.categories << Category.where(title: (news_item.url).split('/')[4]).first_or_create
 end
 
 def parse_censor(news_item, doc)
@@ -53,16 +53,9 @@ end
 namespace :parse do
   desc 'Get news from sites'
   task index: :environment do
-    {
-        # censor: 'http://censor.net.ua/includes/news_ru.xml',
-        liga_news: 'http://news.liga.net/all/rss.xml',
-        lig_biz: 'http://biz.liga.net/all/rss.xml',
-        # tsn: 'http://ru.tsn.ua/rss/',
-        # podrobnosti: 'http://podrobnosti.ua/rss/',
-        # korrespondent: 'http://k.img.com.ua/rss/ru/all_news2.0.xml',
-    }.each do |k, v|
-      news_items = parse_rss(v)
-      news_items.each { |news_item| parse_html(k, news_item) }
+    Media.find_each do |m|
+      news_items = parse_rss(m)
+      news_items.each { |news_item| parse_html(m.short_title.to_sym, news_item) }
     end
   end
 end
