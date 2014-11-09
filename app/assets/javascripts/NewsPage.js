@@ -28,28 +28,67 @@ NewsPage.prototype.init = function () {
 
     $("#newsContainer-believeButton").click(function () {
 
-        $.post("http://" + _.app.SERVER_HOSTNAME + ":" + _.app.SERVER_PORT + "/news/"
-            + _.currentID + "/like", function () {
+        if (_.app.auth.IS_LOGGED) {
+            $.post("http://" + _.app.SERVER_HOSTNAME + ":" + _.app.SERVER_PORT + "/news/"
+                + _.currentID + "/like", function () {
                 console.log("Sent believe to " +
                     "http://" + _.app.SERVER_HOSTNAME + ":" + _.app.SERVER_PORT + "/news/"
-                        + _.currentID + "/like");
-        });
+                    + _.currentID + "/like");
+            });
+        } else {
+            $("#registerModal").modal("show");
+        }
 
     });
 
     $("#newsContainer-notBelieveButton").click(function () {
 
-        $.post("http://" + _.app.SERVER_HOSTNAME + ":" + _.app.SERVER_PORT + "news/" + _.currentID
-            + "/dislike", function () {
+        if (_.app.auth.IS_LOGGED) {
+            $.post("http://" + _.app.SERVER_HOSTNAME + ":" + _.app.SERVER_PORT + "news/" + _.currentID
+                + "/dislike", function () {
                 console.log("Sent not believe to " + "http://" + _.app.SERVER_HOSTNAME + ":" +
                     _.app.SERVER_PORT + "news/" + _.currentID
-                        + "/dislike");
-        });
+                    + "/dislike");
+            });
+        } else {
+            $("#registerModal").modal("show");
+        }
 
     });
 
     if (!isNaN(parseInt(newsID = location.hash.slice(1)))) {
         this.load(newsID);
+    }
+
+};
+
+NewsPage.prototype.updateComments = function () {
+
+    var _ = this;
+
+    $.get("http://" + _.app.SERVER_HOSTNAME + ":" + _.app.SERVER_PORT + "/news/"
+        + _.currentID + "/comments.json", function (data) {
+
+        //$("#newsComments-activity").css("display", _.app.auth.IS_LOGGED ? "block" : "none");
+
+        _.renderComments(data.comments);
+
+    });
+
+};
+
+NewsPage.prototype.renderComments = function (arr) {
+
+    $("#newsComments").empty();
+
+    for (var i in arr) {
+
+        var c = arr[i];
+
+        $("#newsComments").append("<div class=\"ui segment\">" + c.text.replace(/</g, "&lt;")
+            + "<span class=\"commentDate\">" + (new Date(c["created_at"])).toLocaleString()
+            + "</span></div>");
+
     }
 
 };
@@ -67,34 +106,12 @@ NewsPage.prototype.load = function (id) {
     $("#newsContainer").css("left", "0");
     $("#menu").sidebar("hide");
 
-    var renderComments = function (arr) {
-
-        $("#newsComments").html("");
-
-        for (var i in arr) {
-
-            var c = arr[i];
-
-            $("#newsComments").append("<div class=\"ui segment\">" + c.text.replace(/</g, "&lt;")
-                + "</div>");
-
-        }
-
-    };
-
     $.get("http://" + this.app.SERVER_HOSTNAME + ":" + this.app.SERVER_PORT
         + "/news/" + id + ".json", function (data) {
 
         data = data["news_item"];
 
-        $.get("http://" + _.app.SERVER_HOSTNAME + ":" + _.app.SERVER_PORT + "/news/"
-            + _.currentID + "/comments.json", function (data) {
-
-            $("#newsComments-activity").css("display", _.app.auth.IS_LOGGED ? "block" : "none");
-
-            renderComments(data.comments);
-
-        });
+        _.updateComments.call(_);
 
         $("#newsContainer-title").text(data["title"]);
         $("#newsContainer-body").html(data["text"]);
