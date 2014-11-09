@@ -28,6 +28,6 @@ class NewsItemsController < ApplicationController
 
   protected
   def collection
-    @news_items ||= end_of_association_chain.order('rating DESC').page(params[:page]).per(50)
+    @news_items ||= end_of_association_chain.order('id DESC').page(params[:page]).per(50)
   end
 end

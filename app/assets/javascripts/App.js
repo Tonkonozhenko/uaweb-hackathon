@@ -40,31 +40,50 @@ App.prototype.init = function () {
         }
     });
 
+//    this.appendCard({
+//        id: 1,
+//        title: "Breaking news",
+//        text: "This is test"
+//    });
+//
+//    this.appendCard({
+//        id: 2,
+//        title: "Breaking news 2",
+//        text: "This is test, dasjkdh kadhj shdjk ahskjdh jasjd hakjs dhkjashjd hakjs hjka shdkj"
+//    });
+//
+//    this.appendCard({
+//        id: 3,
+//        title: "You will not believe",
+//        text: "Really, it is hard to believe"
+//    });
+//
+//    this.appendCard({
+//        id: 4,
+//        title: "You won't really believe!",
+//        text: "Too much text, too much text, too much text, too much text, too much text, " +
+//            "too much text, too much text, too much text, too much text, too much text, " +
+//            "too much text, too much text, too much text, too much text, too much text, " +
+//            "too much text, too much text, too much text, too much text, too much text..."
+//    });
+
 };
 
 App.prototype.appendCard = function (data) {
-
-    console.log(data);
 
     var _ = this,
         d1 = $("<div></div>"),
         d2 = $("<div></div>"),
         d3 = $("<div class='card'></div>"),
         h1 = $("<h1></h1>"),
-        rating = $('<div class="rating"><div class="ui striped progress" style="height: 28px;">' +
-            '<div class="bar" style="background: green; width: ' + (data.rating*100) + '%">' +
-            '</div><div class="bar" style="background: red; width: ' + (100 - data.rating*100) + '%">' +
-            '</div></div></div>'),
         a =  $("<a href=\"#" + data.id + "\">" + data.title + "</a>"),
         img = $('<img>', {src: data.image_url}),
         divider = $("<div class='ui divider'></div>");
 //        p = $("<p>" + data.text + "</p>");
 
-    rating.css("display", "none");
     h1.append(a);
     d3.append(img);
     d3.append(h1);
-    d3.append(rating);
     d3.append(divider);
 //    d3.append(divider);
 //    d3.append(p);
