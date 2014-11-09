@@ -30,6 +30,15 @@ html, body {
   }
 }
 
+a, a:visited {
+  color: #A1CF64;
+}
+
+a:hover, a:visited:hover {
+  color: #58cf55;
+  text-shadow: 1px 1px 7px white;
+}
+
 h1 {
   font-size: 120%;
 }
@@ -69,6 +78,11 @@ h1 {
 
 .card:hover .rating {
   display: block !important;
+}
+
+.sideNewsRating {
+  position: relative;
+  left: -18px;
 }
 
 #menuButton {
